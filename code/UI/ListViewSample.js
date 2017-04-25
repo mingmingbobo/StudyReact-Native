@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, Text, View ,StyleSheet ,TextInput,ListView,Image} from 'react-native';
+import { AppRegistry, Text, View ,StyleSheet ,TextInput,ListView,Image, TouchableOpacity} from 'react-native';
 
 class ListViewSample extends Component {
   constructor(props) {
@@ -45,16 +45,23 @@ class ListViewSample extends Component {
   _renderMovie(movie){
 
     return(
+
+    //  <TouchableOpacity style = {styles.container} onPress={() => this._pressRow(rowData)} activeOpacity={1.0}>
+      <View>
       <View style = {styles.container}>
       <Image
       source = {{uri: movie.posters.thumbnail}}
       style = {styles.thumbnail}
        />
-       <View style =  {styles.secContainer}>
+       <View style =  {styles.rightContainer}>
        <Text style = {styles.title}>{movie.title}</Text>
        <Text style = {styles.year}>{movie.year}</Text>
        </View>
       </View>
+      <View style={styles.separator}></View>
+      </View>
+      //</TouchableOpacity>
+
     );
 
   }
@@ -82,12 +89,10 @@ container:{
   backgroundColor: '#F5FCFF'
 },
 
-secContainer:{
-  /*
+rightContainer:{
  flex: 1,
  flexDirection: 'column',
  justifyContent: 'space-between'
- */
 },
 
 listView: {
@@ -106,20 +111,29 @@ listView: {
      fontSize: 20,
      marginLeft: 10,
      marginTop:5,
+     height: 50,
      textAlign: 'left',
    },
 
    year: {
          textAlign: 'left',
          marginLeft: 10,
-         marginBottom:5,
+         marginBottom:15,
      },
 
      loading: {
        fontSize: 30,
        textAlign: 'center',
        color: 'red'
-     }
+     },
+separator: {
+  //flex: 1,
+  //position: 'absolute',
+   left: 0,
+   bottom:5,
+   height: 1,
+   backgroundColor: '#CCCCCC',
+ },
 });
 
 
