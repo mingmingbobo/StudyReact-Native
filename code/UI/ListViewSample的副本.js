@@ -50,32 +50,80 @@ class ListViewSample extends Component {
       });
   }
 
+  _renderLoadingView() {
+    return ( < View style = {
+        styles.container
+      } >
+      < Text style = {
+        styles.loading
+      } > Loading movies...... < /Text> < /View >
+    );
+  }
 
-    _renderLoadingView(){
-      return(
-        <View style = {styles.container}>
-        <Text style = {styles.loading}>Loading movies...... </Text>
-        </View>
-      );
-    }
 
-    _renderRow(rowData, sectionID, rowID) {
-      return(
-        <TouchableHighlight onPress = {  () => this._pressRow(rowID) }>
-        <View style = {styles.container}>
-        <Image
-        source = {{uri: rowData.posters.thumbnail}}
-        style = {styles.thumbnail}
-         />
-         <View style =  {styles.secContainer}>
-         <Text style = {styles.title}>{rowData.title}</Text>
-         <Text style = {styles.year}>{rowData.year}</Text>
-         </View>
-        </View>
-        </TouchableHighlight>
-      );
-    }
+  _renderRow(rowData, sectionID, rowID) {
+    return ( < View >
+        < TouchableHighlight onPress = {
+          () => this._pressRow(rowID)
+        } >
+        < View style = {
+          styles.container
+        } >
+        < Image source = {
+          {
+            uri: rowData.posters.thumbnail
+          }
+        }
+        style = {
+          styles.thumbnail
+        }
+        /> < View style = {
+        styles.secContainer
+      } >
+      < Text style = {
+        styles.title
+      } > {
+        rowData.title
+      } < /Text> < Text style = {
+    styles.year
+  } > {
+    rowData.year
+  } < /Text> < /View > < /View> < /TouchableHighlight > < /View>
+);
+}
 
+/*
+//  <TouchableOpacity style = {styles.container} onPress={() => this._pressRow(rowData)} activeOpacity={1.0}>
+        < View >
+        < TouchableHighlight onPress = {
+          () => this._pressRow(rowID)
+        } >
+        < View style = {
+          styles.container
+        } >
+        < Image source = {
+          {
+            uri: rowData.posters.thumbnail
+          }
+        }
+        style = {
+          styles.thumbnail
+        }
+        /> < View style = {
+        styles.rightContainer
+      } >
+      < Text style = {
+        styles.title
+      } > {
+        rowData.title
+      } < /Text> < Text style = {
+    styles.year
+  } > {
+    rowData.year
+  } < /Text> < /View > < /View> < /TouchableHighlight > < View style = {
+    styles.separator
+  } > < /View> < /View >
+*/
 
 
 _pressRow(rowID) {

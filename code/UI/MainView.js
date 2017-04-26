@@ -7,6 +7,7 @@
 import ListViewSample from './ListViewSample.js'
 import ScrollViewSample from './ScrollViewSample.js'
 import FlexBox from './FlexBox.js'
+import NavigatorIOSExamplePage from './NavigatorIOSExamplePage'
 import React, { Component } from 'react';
 import { AppRegistry, Text, View ,StyleSheet ,TabBarIOS,NavigatorIOS} from 'react-native';
 
@@ -21,6 +22,7 @@ class StudyReactProject extends Component {
   }
 
   render(){
+    const {onExampleExit} = this.props;
     return(
     <TabBarIOS
      unselectedTintColor="yellow"
@@ -35,19 +37,21 @@ class StudyReactProject extends Component {
            selectedTab: 'listViewSample',
          });
        }}>
-
        <NavigatorIOS // 上部导航和界面
+                           ref="nav"
                            tintColor="red"
                            style={{flex:1}} // 必须要设置大小
                            initialRoute = {
                                {
                                    component: ListViewSample,
-                                   title:'listViewSample'
+                                   title:'listViewSample',
+                                   passProps: {onExampleExit},
+                                   //passProps: {navigator: this.props.navigator}
+                                   //passProps: { navigator: this.props.navigator},
                                    //leftButtonIcon:require('./image/tips_red_icon.png'),
                                    //rightButtonIcon:require('./image/tips_red_icon.png')
                                }
                            }/>
-
      </TabBarIOS.Item>
      <TabBarIOS.Item
        //systemIcon="history"
@@ -74,6 +78,8 @@ class StudyReactProject extends Component {
                                }
                            }/>
 
+      // <ScrollViewSample navigator={this.props.navigator} />
+
      </TabBarIOS.Item>
      <TabBarIOS.Item
        icon={require('./image/menu_real_time_icon.png')}
@@ -86,6 +92,7 @@ class StudyReactProject extends Component {
           // presses: this.state.presses + 1
          });
        }}>
+
        <NavigatorIOS // 上部导航和界面
                            tintColor="red"
                            style={{flex:1}} // 必须要设置大小
@@ -98,7 +105,35 @@ class StudyReactProject extends Component {
                                }
                            }/>
 
+//<FlexBox navigator={this.props.navigator} />
      </TabBarIOS.Item>
+
+     <TabBarIOS.Item
+       icon={require('./image/menu_real_time_icon.png')}
+       renderAsOriginal
+       title="navigator"
+       selected={this.state.selectedTab === 'navigator'}
+       onPress={() => {
+         this.setState({
+           selectedTab: 'navigator',
+          // presses: this.state.presses + 1
+         });
+       }}>
+
+       <NavigatorIOS // 上部导航和界面
+                           tintColor="red"
+                           style={{flex:1}} // 必须要设置大小
+                           initialRoute = {
+                               {
+                                   component: NavigatorIOSExamplePage,
+                                   title:'navigatorSample',
+                                   passProps: {onExampleExit},
+                                  // leftButtonIcon:require('./image/tips_red_icon.png'),
+                                   //rightButtonIcon:require('./image/tips_red_icon.png')
+                               }
+                           }/>
+     </TabBarIOS.Item>
+
    </TabBarIOS>
     );
   }
