@@ -11,7 +11,7 @@ import React, {
 from 'react';
 import {
   AppRegistry, Text, View, StyleSheet, TextInput, ListView, Image,
-  TouchableHighlight, NavigatorIOS, TabBarIOS
+  TouchableHighlight,TouchableOpacity, NavigatorIOS, TabBarIOS
 }
 from 'react-native';
 
@@ -59,9 +59,11 @@ class ListViewSample extends Component {
       );
     }
 
+
+
     _renderRow(rowData, sectionID, rowID) {
       return(
-        <TouchableHighlight onPress = {  () => this._pressRow(rowID) }>
+        <TouchableHighlight onPress={()=>this._rowPressed()}>
         <View style = {styles.container}>
         <Image
         source = {{uri: rowData.posters.thumbnail}}
@@ -76,20 +78,21 @@ class ListViewSample extends Component {
       );
     }
 
+    _rowPressed() {
+      console.log("我被点了");
+    }
 
 
-_pressRow(rowID) {
-  console.log(rowID + "我被点了");
-  this.props.navigator.push({
-    title: 'movie detail',
-    component: MovieDetail,
-    backButtonTitle: 'Custom Back',
-    passProps: {
-      depth: this.props.depth ? this.props.depth + 1 : 1
-    },
-  });
-}
 
+
+    // this.props.navigator.push({
+    //   title: 'movie detail',
+    //   component: MovieDetail,
+    //   backButtonTitle: 'Custom Back',
+    //   passProps: {
+    //     depth: this.props.depth ? this.props.depth + 1 : 1
+    //   },
+    // });
 render() {
   if (!this.state.loaded) {
     return this._renderLoadingView();
