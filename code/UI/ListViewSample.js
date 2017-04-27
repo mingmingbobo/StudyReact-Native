@@ -11,7 +11,7 @@ import React, {
 from 'react';
 import {
   AppRegistry, Text, View, StyleSheet, TextInput, ListView, Image,
-  TouchableHighlight,TouchableOpacity, NavigatorIOS, TabBarIOS
+  TouchableHighlight, NavigatorIOS, TabBarIOS
 }
 from 'react-native';
 
@@ -50,49 +50,94 @@ class ListViewSample extends Component {
       });
   }
 
-
-    _renderLoadingView(){
-      return(
-        <View style = {styles.container}>
-        <Text style = {styles.loading}>Loading movies...... </Text>
-        </View>
-      );
-    }
-
-
-
-    _renderRow(rowData, sectionID, rowID) {
-      return(
-        <TouchableHighlight onPress={()=>this._rowPressed()}>
-        <View style = {styles.container}>
-        <Image
-        source = {{uri: rowData.posters.thumbnail}}
-        style = {styles.thumbnail}
-         />
-         <View style =  {styles.secContainer}>
-         <Text style = {styles.title}>{rowData.title}</Text>
-         <Text style = {styles.year}>{rowData.year}</Text>
-         </View>
-        </View>
-        </TouchableHighlight>
-      );
-    }
-
-    _rowPressed() {
-      console.log("我被点了");
-    }
+  _renderLoadingView() {
+    return ( < View style = {
+        styles.container
+      } >
+      < Text style = {
+        styles.loading
+      } > Loading movies...... < /Text> < /View >
+    );
+  }
 
 
+  _renderRow(rowData, sectionID, rowID) {
+    return ( < View >
+        < TouchableHighlight onPress = {
+          () => this._pressRow(rowID)
+        } >
+        < View style = {
+          styles.container
+        } >
+        < Image source = {
+          {
+            uri: rowData.posters.thumbnail
+          }
+        }
+        style = {
+          styles.thumbnail
+        }
+        /> < View style = {
+        styles.secContainer
+      } >
+      < Text style = {
+        styles.title
+      } > {
+        rowData.title
+      } < /Text> < Text style = {
+    styles.year
+  } > {
+    rowData.year
+  } < /Text> < /View > < /View> < /TouchableHighlight > < /View>
+);
+}
+
+/*
+//  <TouchableOpacity style = {styles.container} onPress={() => this._pressRow(rowData)} activeOpacity={1.0}>
+        < View >
+        < TouchableHighlight onPress = {
+          () => this._pressRow(rowID)
+        } >
+        < View style = {
+          styles.container
+        } >
+        < Image source = {
+          {
+            uri: rowData.posters.thumbnail
+          }
+        }
+        style = {
+          styles.thumbnail
+        }
+        /> < View style = {
+        styles.rightContainer
+      } >
+      < Text style = {
+        styles.title
+      } > {
+        rowData.title
+      } < /Text> < Text style = {
+    styles.year
+  } > {
+    rowData.year
+  } < /Text> < /View > < /View> < /TouchableHighlight > < View style = {
+    styles.separator
+  } > < /View> < /View >
+*/
 
 
-    // this.props.navigator.push({
-    //   title: 'movie detail',
-    //   component: MovieDetail,
-    //   backButtonTitle: 'Custom Back',
-    //   passProps: {
-    //     depth: this.props.depth ? this.props.depth + 1 : 1
-    //   },
-    // });
+_pressRow(rowID) {
+  console.log(rowID + "我被点了");
+  this.props.navigator.push({
+    title: 'movie detail',
+    component: MovieDetail,
+    backButtonTitle: 'Custom Back',
+    passProps: {
+      depth: this.props.depth ? this.props.depth + 1 : 1
+    },
+  });
+}
+
 render() {
   if (!this.state.loaded) {
     return this._renderLoadingView();
